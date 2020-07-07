@@ -5,10 +5,12 @@ import {Switch,Route} from "react-router-dom";
 import Header from './components/header/Header'
 import AddProduct from "./components/addProduct/AddProduct";
 import UpdateProduct from "./components/updateProduct/UpdateProduct";
+import LoginPage from "./components/loginPage/LoginPage";
 
 function App() {
   return (
       <React.Fragment>
+          <LoginPage/>
           <Header/>
           <Switch>
               <Route exact path="/" component={AddProduct}/>
