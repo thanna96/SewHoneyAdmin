@@ -7,7 +7,7 @@ class Header extends Component {
             <div>
                 <ul >
                     <li>
-                        <Link to='/' >
+                        <Link to='/AddProduct' >
                             Add
                         </Link>
                     </li>

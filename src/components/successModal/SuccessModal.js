@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 
-class LoginPage extends Component {
+class SuccessModal extends Component {
     render() {
         return (
             <div>
-                <p>Login Here</p>
+                <p>Success</p>
             </div>
         );
     }
 }
 
-export default LoginPage;
+export default SuccessModal;

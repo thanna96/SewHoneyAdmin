@@ -10,10 +10,10 @@ import LoginPage from "./components/loginPage/LoginPage";
 function App() {
   return (
       <React.Fragment>
-          <LoginPage/>
           <Header/>
           <Switch>
-              <Route exact path="/" component={AddProduct}/>
+              <Route exact path="/" component={LoginPage}/>
+              <Route exact path="/AddProduct" component={AddProduct}/>
               <Route exact path="/Update" component={UpdateProduct}/>
           </Switch>
       </React.Fragment>
