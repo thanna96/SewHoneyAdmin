@@ -23,7 +23,7 @@ class UpdateColor extends Component {
                     </Col>
                 </Row>
                 <Form.Group controlId="colors">
-                    <Form.Label>Select Color</Form.Label>
+                    <Form.Label>Select Color:</Form.Label>
                     <Form.Control name="colors" onChange={this.handleArrays} as="select">
                         <option value="White">White</option>
                         <option value="Red">Red</option>
@@ -32,7 +32,7 @@ class UpdateColor extends Component {
                         <option value="Blue">Blue</option>
                     </Form.Control>
                 </Form.Group>
-                <Button variant="primary" type="submit" >
+                <Button variant="danger" type="submit" >
                     Delete Selected Color
                 </Button>
                 <hr style={{"background":"#e6be8a"}}/>

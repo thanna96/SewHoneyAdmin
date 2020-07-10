@@ -3,7 +3,6 @@ import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import Button from 'react-bootstrap/Button'
-import Header from "../header/Header";
 
 const AWS = require("aws-sdk");
 AWS.config.update({
@@ -165,9 +164,10 @@ class AddProduct extends Component {
     render() {
         return (
             <div className="row col-10 mx-auto col-md-6 ">
-                <Header/>
                 <h3>Add New Product:</h3>
                 <Form onSubmit={this.handleSubmit} >
+                    <hr style={{"background":"#e6be8a"}}/>
+
                     <Form.Group>
                         <Form.File multiple id="imgUpload" label="Picture:" onChange={this.handleFileChanged} />
                     </Form.Group>
@@ -183,13 +183,23 @@ class AddProduct extends Component {
                         </Col>
                     </Row>
                     <br/>
+                    <Form.Group controlId="colors">
+                        <Form.Label>Select Style:</Form.Label>
+                        <Form.Control name="style" onChange={this.handleArrays} as="select">
+                            <option value="Bottom">Bottom</option>
+                            <option value="Top">Top</option>
+                            <option value="One-Piece">One-Piece</option>
+                        </Form.Control>
+                    </Form.Group>
                     <Form.Label>Product Description:</Form.Label>
                     <Form.Control name='description' type="text" as="textarea" rows="3" onChange={this.handleChange}/>
                     <br/>
                     <Button variant="primary" type="submit" >
                         Submit
                     </Button>
+                    <hr style={{"background":"#e6be8a"}}/>
                 </Form>
+
             </div>
         );
     }
