@@ -27,7 +27,9 @@ class LoginPage extends Component {
 
     handleSubmit(Event){
         Event.preventDefault();
-        if (this.state.username === 'name' && this.state.password === 'pass'){
+        if (this.state.username === process.env.REACT_APP_USERNAME
+            && this.state.password === process.env.REACT_APP_PASSWORD){
+            localStorage.setItem("token", 'loggedIn');
             window.location.href='/AddProduct'
         }else{
             console.log("incorrect login info")

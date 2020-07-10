@@ -5,14 +5,17 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router} from "react-router-dom";
+import {ProductProvider} from "./context";
 
 require('dotenv').config();
 
 ReactDOM.render(
   <React.StrictMode>
+      <ProductProvider>
       <Router>
           <App />
       </Router>
+  </ProductProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
