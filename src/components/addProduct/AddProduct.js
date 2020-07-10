@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import Button from 'react-bootstrap/Button'
+import Header from "../header/Header";
 
 const AWS = require("aws-sdk");
 AWS.config.update({
@@ -164,6 +165,8 @@ class AddProduct extends Component {
     render() {
         return (
             <div className="row col-10 mx-auto col-md-6 ">
+                <Header/>
+                <h3>Add New Product:</h3>
                 <Form onSubmit={this.handleSubmit} >
                     <Form.Group>
                         <Form.File multiple id="imgUpload" label="Picture:" onChange={this.handleFileChanged} />
@@ -183,16 +186,6 @@ class AddProduct extends Component {
                     <Form.Label>Product Description:</Form.Label>
                     <Form.Control name='description' type="text" as="textarea" rows="3" onChange={this.handleChange}/>
                     <br/>
-                    <Form.Group controlId="colors">
-                        <Form.Label>Select Colors (ctrl+click)</Form.Label>
-                        <Form.Control name="colors" onChange={this.handleArrays} as="select" multiple>
-                            <option value="White">White</option>
-                            <option value="Red">Red</option>
-                            <option value="Black">Black</option>
-                            <option value="Yellow">Yellow</option>
-                            <option value="Blue">Blue</option>
-                        </Form.Control>
-                    </Form.Group>
                     <Button variant="primary" type="submit" >
                         Submit
                     </Button>

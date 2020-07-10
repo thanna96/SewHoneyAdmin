@@ -1,23 +1,24 @@
 import React, {Component} from 'react';
-import {Link} from "react-router-dom";
+import { Navbar,Nav } from 'react-bootstrap'
 
 class Header extends Component {
     render() {
         return (
             <div>
-                <ul >
-                    <li>
-                        <Link to='/AddProduct' >
-                            Add
-                        </Link>
-                    </li>
-
-                    <li >
-                        <Link to='/Update'>
-                            Update
-                        </Link>
-                    </li>
-                </ul>
+                <div className="row">
+                    <div className="col-md-12">
+                        <Navbar  bg="dark" variant="dark" expand="lg" sticky="top">
+                            <Nav className="mr-auto">
+                                <Nav.Link href='/AddProduct' >
+                                    Add
+                                </Nav.Link>
+                                <Nav.Link href='/Update'>
+                                    Update
+                                </Nav.Link>
+                            </Nav>
+                        </Navbar>
+                    </div>
+                </div>
             </div>
         );
     }
