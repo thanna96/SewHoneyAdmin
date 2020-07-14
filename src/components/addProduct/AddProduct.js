@@ -24,13 +24,13 @@ class AddProduct extends Component {
             price: null,
             img: [],
             description: '',
-            sizes: [],
-            colors: []
+            sizes: ['XS','S','M','L','XL'],
+            style: ''
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleFileChanged = this.handleFileChanged.bind(this);
-        this.handleArrays = this.handleArrays.bind(this);
+        //this.handleArrays = this.handleArrays.bind(this);
     }
 
     componentDidMount() {
@@ -52,14 +52,18 @@ class AddProduct extends Component {
                 params.ExclusiveStartKey  = items.LastEvaluatedKey;
             }while(typeof items.LastEvaluatedKey != "undefined");
 
+            let mapIDS = scanResults.map(product => parseInt(product.id))
+            let newID = Math.max(...mapIDS) + 1
+            console.log('ids:',mapIDS)
+            console.log('new id',newID)
             this.setState({
-                id:scanResults.length + 1
+                id:newID
             })
         };
         scanTable()
     }
 
-    addProduct = (id,title,price,imgName,description,colors,sizes) =>{
+    addProduct = (id,title,price,imgName,description,style,sizes) =>{
         const params = {
             TableName: "Products",
             Item: {
@@ -69,10 +73,9 @@ class AddProduct extends Component {
                     "img": imgName,
                     "price": price,
                     "sizes": sizes,
-                    "color": colors,
                     "selSize": '',
                     "selColor": '',
-                    "style": "One-Piece",
+                    "style": style,
                     "description": description,
                     "inCart": false,
                     "count": 0,
@@ -109,7 +112,7 @@ class AddProduct extends Component {
         Array.from(Event.target.files).forEach((file)=>{
             const uploadParams = {
                 Bucket: 'sew-honey-bucket',
-                Key: "img/"+file.name + ".jpeg",
+                Key: "img/"+ file.name + ".jpeg",
                 Body: ''
             };
             uploadParams.Body = file;
@@ -123,21 +126,15 @@ class AddProduct extends Component {
         })
     }
 
-    handleArrays(Event) {
-        let nam = Event.target.name;
-        let val = Event.target.value;
-        if(nam === 'colors'){
-            if(this.state.colors.indexOf(val) < 0 ){
-                this.state.colors.push(val)
-            }
-        }
-        if(nam === 'sizes'){
-            if(this.state.sizes.indexOf(val) < 0 ){
-                this.state.sizes.push(val)
-            }
-        }
-        console.log(this.state.colors)
-    }
+    // handleArrays(Event) {
+    //     let nam = Event.target.name;
+    //     let val = Event.target.value;
+    //     if(nam === 'sizes'){
+    //         if(this.state.sizes.indexOf(val) < 0 ){
+    //             this.state.sizes.push(val)
+    //         }
+    //     }
+    // }
 
     handleSubmit(Event) {
         let imageNames = this.state.imgFiles;
@@ -148,7 +145,6 @@ class AddProduct extends Component {
             "price",this.state.price,
             "img",imageNames.map(image => image = image + ".jpeg"),
             "desc",this.state.description,
-            "colors",this.state.colors,
             "sizes",this.state.sizes);
         this.addProduct(
             this.state.id,
@@ -156,7 +152,7 @@ class AddProduct extends Component {
             parseFloat(this.state.price),
             imageNames.map(image => image = image + ".jpeg"),
             this.state.description,
-            this.state.colors,
+            this.state.style,
             this.state.sizes);
 
         Event.preventDefault();
@@ -183,9 +179,10 @@ class AddProduct extends Component {
                         </Col>
                     </Row>
                     <br/>
-                    <Form.Group controlId="colors">
+                    <Form.Group controlId="style">
                         <Form.Label>Select Style:</Form.Label>
-                        <Form.Control name="style" onChange={this.handleArrays} as="select">
+                        <Form.Control name="style" onChange={this.handleChange} as="select">
+                            <option value="">-</option>
                             <option value="Bottom">Bottom</option>
                             <option value="Top">Top</option>
                             <option value="One-Piece">One-Piece</option>
