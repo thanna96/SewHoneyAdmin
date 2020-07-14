@@ -4,7 +4,6 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-
 const AWS = require("aws-sdk");
 AWS.config.update({
     region: "us-east-1",
