@@ -26,7 +26,8 @@ class AddProduct extends Component {
             img: [],
             description: '',
             sizes: ['XS','S','M','L','XL'],
-            style: ''
+            style: '',
+            gender: ''
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -64,7 +65,7 @@ class AddProduct extends Component {
         scanTable()
     }
 
-    addProduct = (id,title,price,imgName,description,style,sizes) =>{
+    addProduct = (id,title,price,imgName,description,style,sizes,gender) =>{
         const params = {
             TableName: "Products",
             Item: {
@@ -78,6 +79,7 @@ class AddProduct extends Component {
                     "selColor": '',
                     "style": style,
                     "description": description,
+                    "gender": gender,
                     "inCart": false,
                     "count": 0,
                     "total": 0
@@ -146,7 +148,8 @@ class AddProduct extends Component {
             "price",this.state.price,
             "img",imageNames.map(image => image = image + ".jpeg"),
             "desc",this.state.description,
-            "sizes",this.state.sizes);
+            "sizes",this.state.sizes,
+            "gender",this.state.gender);
         this.addProduct(
             this.state.id,
             this.state.title,
@@ -154,7 +157,8 @@ class AddProduct extends Component {
             imageNames.map(image => image = image + ".jpeg"),
             this.state.description,
             this.state.style,
-            this.state.sizes);
+            this.state.sizes,
+            this.state.gender);
 
         window.location.href = "/AddProduct";
 
@@ -189,6 +193,14 @@ class AddProduct extends Component {
                             <option value="bottom">Bottom</option>
                             <option value="Top">Top</option>
                             <option value="One-Piece">One-Piece</option>
+                        </Form.Control>
+                    </Form.Group>
+                    <Form.Group controlId="gender">
+                        <Form.Label>Select Gender:</Form.Label>
+                        <Form.Control name="gender" onChange={this.handleChange} as="select">
+                            <option value="">-</option>
+                            <option value="men">Men</option>
+                            <option value="women">Women</option>
                         </Form.Control>
                     </Form.Group>
                     <Form.Label>Product Description:</Form.Label>

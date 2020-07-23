@@ -111,20 +111,21 @@ class UpdateColor extends Component {
     render() {
         return (
             <Form onSubmit={this.deleteColor} >
+
                 <hr style={{"background":"#e6be8a"}}/>
                 <h3>Update Colors:</h3>
-                <Row>
+                    <Form.Label>Color Name:</Form.Label>
+                    <Row>
                     <Col>
-                        <Form.Label>Color Name:</Form.Label>
                         <Form.Control name='newColor' onChange={this.handleChange}/>
                     </Col>
                     <Col>
-                        <Form.Label>Add New Color:</Form.Label>
+
                         <Button variant="primary" onClick={this.addColor}>
                             Submit Color
                         </Button>
                     </Col>
-                </Row>
+                    </Row>
                 <Form.Group controlId="colors">
                     <Form.Label>Select Color:</Form.Label>
                     <Form.Control name="selectedColor" onChange={this.handleChange} as="select">

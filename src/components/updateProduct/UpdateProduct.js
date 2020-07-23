@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import UpdateColor from "../updateColor/UpdateColor";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 const AWS = require("aws-sdk");
 AWS.config.update({
@@ -87,7 +89,7 @@ class UpdateProduct extends Component {
 
     render() {
         return (
-            <div className="row col-10 mx-auto col-md-6 ">
+            <div className="col-10 mx-auto col-md-6 ">
                 <h3>Update Information</h3>
                 <UpdateColor/>
                 <Form>
@@ -95,6 +97,7 @@ class UpdateProduct extends Component {
                     <Form.Group controlId="products">
                         <Form.Label>Select Product:</Form.Label>
                         <Form.Control name="selProduct" onChange={this.handleChange} as="select">
+                            <option value="">-</option>
                             <option value="White">Bikini1</option>
                             <option value="Red">2</option>
                             <option value="Black">3</option>
@@ -107,15 +110,64 @@ class UpdateProduct extends Component {
                         <Form.File  id="imgUpload" label="Add New Picture:" onChange={this.handleFileChanged} />
                     </Form.Group>
 
+                    <Row>
+                        <Col>
+                            <Form.Group controlId="picture">
+                                <Form.Label>Remove Picture:</Form.Label>
+                                <Form.Control name="picture" onChange={this.handleChange} as="select">
+                                    <option value="">-</option>
+                                    <option value="men">Pic1</option>
+                                    <option value="women">Pic2</option>
+                                </Form.Control>
+                            </Form.Group>
+                        </Col>
+                        <Col>
+                            <div className="container-fluid">
+                                <img src={this.state.picture} alt="pic"/>
+                            </div>
+                        </Col>
+                    </Row>
+
+                    <Button variant="danger" >
+                        Delete Selected Picture
+                    </Button>
+                    <br/>
+
                     <Form.Label>Change Price:</Form.Label>
                     <Form.Control name='price' onChange={this.handleChange}/>
                     <br/>
+
+                    <Form.Group controlId="gender">
+                        <Form.Label>Change Gender:</Form.Label>
+                        <Form.Control name="gender" onChange={this.handleChange} as="select">
+                            <option value="">-</option>
+                            <option value="men">Men</option>
+                            <option value="women">Women</option>
+                        </Form.Control>
+                    </Form.Group>
+
+                    <Form.Group controlId="style">
+                        <Form.Label>Change Style:</Form.Label>
+                        <Form.Control name="style" onChange={this.handleChange} as="select">
+                            <option value="">-</option>
+                            <option value="bottom">Bottom</option>
+                            <option value="Top">Top</option>
+                            <option value="One-Piece">One-Piece</option>
+                        </Form.Control>
+                    </Form.Group>
+
+                    <Form.Label>Change Description:</Form.Label>
+                    <Form.Control name='description' type="text" as="textarea" rows="3" onChange={this.handleChange}/>
+                    <br/>
+
                     <Button variant="primary" type="submit" >
                         Submit Changes
                     </Button>
+
                     <br/>
                     <br/>
-                    <Button variant="danger" type="submit" >
+
+                    <Button variant="danger">
                         Delete Product
                     </Button>
                 </Form>
