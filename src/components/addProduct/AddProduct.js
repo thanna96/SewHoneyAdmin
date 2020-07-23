@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import Button from 'react-bootstrap/Button'
+import {ProductConsumer} from "../../context";
 
 const AWS = require("aws-sdk");
 AWS.config.update({
@@ -155,6 +156,8 @@ class AddProduct extends Component {
             this.state.style,
             this.state.sizes);
 
+        window.location.href = "/AddProduct";
+
         Event.preventDefault();
     }
     render() {
@@ -183,7 +186,7 @@ class AddProduct extends Component {
                         <Form.Label>Select Style:</Form.Label>
                         <Form.Control name="style" onChange={this.handleChange} as="select">
                             <option value="">-</option>
-                            <option value="Bottom">Bottom</option>
+                            <option value="bottom">Bottom</option>
                             <option value="Top">Top</option>
                             <option value="One-Piece">One-Piece</option>
                         </Form.Control>
@@ -191,10 +194,38 @@ class AddProduct extends Component {
                     <Form.Label>Product Description:</Form.Label>
                     <Form.Control name='description' type="text" as="textarea" rows="3" onChange={this.handleChange}/>
                     <br/>
-                    <Button variant="primary" type="submit" >
-                        Submit
-                    </Button>
+                    <ProductConsumer>
+                        {value=>(
+                            <div>
+                                <Button variant="primary" onClick={()=>{
+                                    let imageNames = this.state.imgFiles;
+                                    value.openModal(
+                                    {
+
+                                        Item: {
+                                            "id": this.state.id,
+                                            "title": this.state.title,
+                                            "info": {
+                                                "img": imageNames.map(image => image = image + ".jpeg"),
+                                                "price": this.state.price,
+                                                "sizes": this.state.sizes,
+                                                "selSize": '',
+                                                "selColor": '',
+                                                "style": this.state.style,
+                                                "description": this.state.description,
+                                                "inCart": false,
+                                                "count": 0,
+                                                "total": 0
+                                            }
+                                        }
+                                    })}}>Preview
+                                </Button>
+                            </div>)}
+                    </ProductConsumer>
                     <hr style={{"background":"#e6be8a"}}/>
+                    <Button variant="primary" type="submit" >
+                        Confirm
+                    </Button>
                 </Form>
 
             </div>

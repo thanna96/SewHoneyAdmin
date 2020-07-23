@@ -13,8 +13,9 @@ const ProductContext = React.createContext();
 class ProductProvider extends Component {
     state ={
         products: [],
-        detailProduct: "detailProduct",
+        detailProduct: {},
         modalOpen:false,
+        modalProduct: {}
     }
 
     componentDidMount() {
@@ -55,8 +56,9 @@ class ProductProvider extends Component {
         });
     }
 
-    openModal = (id,title) =>{
-        const product = this.getItem(id,title);
+    openModal = (product) =>{
+        //const product = this.getItem(id,title);
+        //console.log(product)
         this.setState( () =>{
             return {modalProduct:product,modalOpen:true}
         })

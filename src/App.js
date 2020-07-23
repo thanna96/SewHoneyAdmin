@@ -5,6 +5,7 @@ import Header from './components/header/Header'
 import AddProduct from "./components/addProduct/AddProduct";
 import UpdateProduct from "./components/updateProduct/UpdateProduct";
 import LoginPage from "./components/loginPage/LoginPage";
+import SuccessModal from "./components/successModal/SuccessModal";
 
 const checkAuth = () =>{
     const token = localStorage.getItem('token');
@@ -30,6 +31,7 @@ function App() {
               <AuthRoute exact path="/Update" component={UpdateProduct}/>
               <Route component={LoginPage}/>
           </Switch>
+          <SuccessModal/>
       </React.Fragment>
   );
 }
