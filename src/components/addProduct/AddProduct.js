@@ -213,7 +213,6 @@ class AddProduct extends Component {
                                     let imageNames = this.state.imgFiles;
                                     value.openModal(
                                     {
-
                                         Item: {
                                             "id": this.state.id,
                                             "title": this.state.title,
@@ -225,6 +224,7 @@ class AddProduct extends Component {
                                                 "selColor": '',
                                                 "style": this.state.style,
                                                 "description": this.state.description,
+                                                "gender": this.state.gender,
                                                 "inCart": false,
                                                 "count": 0,
                                                 "total": 0
