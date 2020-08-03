@@ -48,6 +48,9 @@ class ProductProvider extends Component {
     getItem = (id,title) =>{
         return this.state.products.find(item => item.id === id && item.title === title);
     }
+    getItem2 = (title) =>{
+        return this.state.products.find(item => item.title === title);
+    }
 
     handleDetail = (id,title) =>{
         const product = this.getItem(id,title);
@@ -78,7 +81,8 @@ class ProductProvider extends Component {
                 openModal: this.openModal,
                 closeModal: this.closeModal,
                 removeItem: this.removeItem,
-                getItem: this.getItem
+                getItem: this.getItem,
+                getItem2: this.getItem2
             }}>
                 {this.props.children}
             </ProductContext.Provider>

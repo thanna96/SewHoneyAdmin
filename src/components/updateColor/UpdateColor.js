@@ -18,6 +18,7 @@ class UpdateColor extends Component {
         super(props);
         this.state = {
             colors: [],
+            table: 'Colors',
             newColor: '',
             selectedColor: ''
         };
@@ -38,7 +39,7 @@ class UpdateColor extends Component {
         this.setState({colors: newColors})
 
         const params = {
-            TableName: "Colors",
+            TableName: this.state.table,
             Item: {
                 "color": this.state.newColor,
                 }
@@ -61,7 +62,7 @@ class UpdateColor extends Component {
        this.setState({colors: newColors})
 
         const params = {
-            TableName: "Colors",
+            TableName: this.state.table,
             Key: {
                 "color": this.state.selectedColor
             }
@@ -88,7 +89,7 @@ class UpdateColor extends Component {
     setColors = ()=>{
         const scanTable = async () => {
             const params = {
-                TableName: "Colors",
+                TableName: this.state.table,
                 ProjectionExpression: "color",
             };
 
@@ -114,18 +115,37 @@ class UpdateColor extends Component {
 
                 <hr style={{"background":"#e6be8a"}}/>
                 <h3>Update Colors:</h3>
-                    <Form.Label>Color Name:</Form.Label>
+
+                <Form.Group controlId="colorType">
+                    <Form.Label>Select Product Type:</Form.Label>
                     <Row>
+                    <Col>
+                        <Form.Control name="table" onChange={this.handleChange} as="select">
+                            <option value="Colors" key="Colors">HandMade</option>
+                            <option value="MColors" key="MColors">Manufactured</option>
+                            <option value="MensColors" key="MensColors">Mens</option>
+                        </Form.Control>
+                    </Col>
+                    <Col>
+                        <Button variant="primary" onClick={this.setColors}>
+                            Select
+                        </Button>
+                    </Col>
+                    </Row>
+                </Form.Group>
+
+                <Form.Label>Color Name:</Form.Label>
+                <Row>
                     <Col>
                         <Form.Control name='newColor' onChange={this.handleChange}/>
                     </Col>
                     <Col>
-
                         <Button variant="primary" onClick={this.addColor}>
                             Submit Color
                         </Button>
                     </Col>
-                    </Row>
+                </Row>
+
                 <Form.Group controlId="colors">
                     <Form.Label>Select Color:</Form.Label>
                     <Form.Control name="selectedColor" onChange={this.handleChange} as="select">

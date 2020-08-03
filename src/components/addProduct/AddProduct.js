@@ -27,7 +27,8 @@ class AddProduct extends Component {
             description: '',
             sizes: ['XS','S','M','L','XL'],
             style: '',
-            gender: ''
+            gender: '',
+            type: ''
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -65,7 +66,7 @@ class AddProduct extends Component {
         scanTable()
     }
 
-    addProduct = (id,title,price,imgName,description,style,sizes,gender) =>{
+    addProduct = (id,title,price,imgName,description,style,sizes,gender,type) =>{
         const params = {
             TableName: "Products",
             Item: {
@@ -82,7 +83,8 @@ class AddProduct extends Component {
                     "gender": gender,
                     "inCart": false,
                     "count": 0,
-                    "total": 0
+                    "total": 0,
+                    "type": type
                 }
             }
         };
@@ -158,7 +160,8 @@ class AddProduct extends Component {
             this.state.description,
             this.state.style,
             this.state.sizes,
-            this.state.gender);
+            this.state.gender,
+            this.state.type);
 
         window.location.href = "/AddProduct";
 
@@ -195,6 +198,14 @@ class AddProduct extends Component {
                             <option value="One-Piece">One-Piece</option>
                         </Form.Control>
                     </Form.Group>
+                    <Form.Group controlId="type">
+                        <Form.Label>Select Creation Style:</Form.Label>
+                        <Form.Control name="type" onChange={this.handleChange} as="select">
+                            <option value="">-</option>
+                            <option value="manufactured">Manufactured</option>
+                            <option value="handmade">Handmade</option>
+                        </Form.Control>
+                    </Form.Group>
                     <Form.Group controlId="gender">
                         <Form.Label>Select Gender:</Form.Label>
                         <Form.Control name="gender" onChange={this.handleChange} as="select">
@@ -227,7 +238,8 @@ class AddProduct extends Component {
                                                 "gender": this.state.gender,
                                                 "inCart": false,
                                                 "count": 0,
-                                                "total": 0
+                                                "total": 0,
+                                                "type":this.state.type
                                             }
                                         }
                                     })}}>Preview

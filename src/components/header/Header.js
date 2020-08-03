@@ -1,7 +1,17 @@
 import React, {Component} from 'react';
-import { Navbar,Nav } from 'react-bootstrap'
+import { Navbar,Nav,Button } from 'react-bootstrap'
 
 class Header extends Component {
+    constructor(props){
+        super(props);
+        this.logOut = this.logOut.bind(this);
+    }
+
+    logOut = () => {
+        localStorage.removeItem("token");
+        window.location.href='/Login'
+    }
+
     render() {
         return (
             <div>
@@ -16,6 +26,9 @@ class Header extends Component {
                                     Update
                                 </Nav.Link>
                             </Nav>
+                            <Button onClick={this.logOut}>
+                                Log Out
+                            </Button>
                         </Navbar>
                     </div>
                 </div>

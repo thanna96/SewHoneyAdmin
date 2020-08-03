@@ -40,13 +40,16 @@ class SuccessModal extends Component {
                                         {/*<img src={"https://s3.amazonaws.com/sew-honey-bucket/img/"+Item.info.img[0]} className="img-fluid" alt="product"/>*/}
 
                                         <h5 className="text-title text-uppercase text-muted mt-3 mb-2">
-                                            style:{Item.info.style}
+                                            Style:{Item.info.style}
                                         </h5>
                                         <h5 className="text-title text-uppercase text-muted mt-3 mb-2">
-                                            gender:{Item.info.gender}
+                                            Creation Style:{Item.info.type}
                                         </h5>
                                         <h5 className="text-title text-uppercase text-muted mt-3 mb-2">
-                                            description:{Item.info.description}
+                                            Gender:{Item.info.gender}
+                                        </h5>
+                                        <h5 className="text-title text-uppercase text-muted mt-3 mb-2">
+                                            Description:{Item.info.description}
                                         </h5>
                                         <h5 className="text-muted">price : ${Item.info.price}</h5>
 
