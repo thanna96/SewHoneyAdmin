@@ -204,6 +204,7 @@ class AddProduct extends Component {
                             <option value="">-</option>
                             <option value="manufactured">Manufactured</option>
                             <option value="handmade">Handmade</option>
+                            <option value="apparel">Apparel</option>
                         </Form.Control>
                     </Form.Group>
                     <Form.Group controlId="gender">

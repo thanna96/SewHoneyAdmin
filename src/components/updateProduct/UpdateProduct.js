@@ -67,19 +67,17 @@ class UpdateProduct extends Component {
         })
     }
 
-    deleteItem(id,title){
-        let newProducts = this.state.products;
-        let selItem = newProducts.find(item => item.title === title)
-        let index = newProducts.indexOf(selItem)
-        newProducts.splice(index,1)
-
-        this.setState({products: newProducts})
+    deleteItem(products){
+        let selItem = products.find(item => item.title === this.state.selProduct)
+        products.splice(products.indexOf(selItem),1)
+        this.setState({selProduct:''})
+        this.setState({products: products})
 
         const params = {
             TableName: "Products",
             Key: {
-                "id": id,
-                "title": title
+                "id": selItem.id,
+                "title": this.state.selProduct
             }
         };
 
@@ -98,9 +96,18 @@ class UpdateProduct extends Component {
                 {(value) => {
                     let products = value.products;
                     let images = [];
+                    let price = 0;
+                    let gender = '-';
+                    let style = '-';
+                    let description = ' ';
+
                     if(this.state.selProduct) {
                         let item = value.getItem2(this.state.selProduct)
                         images = item.info.img
+                        price = item.info.price
+                        gender = item.info.gender
+                        style = item.info.style
+                        description = item.info.description
                     }
                     return (
                         <div className="col-10 mx-auto col-md-6 ">
@@ -143,13 +150,14 @@ class UpdateProduct extends Component {
                                         </div>
                                     </Col>
                                 </Row>
-                                <Button variant="danger">
+                                <Button variant="danger" >
                                     Delete Selected Picture
                                 </Button>
                                 <br/>
 
                                 <Form.Label>Change Price:</Form.Label>
                                 <Form.Control name='price'
+                                              placeholder={price}
                                               onChange={this.handleChange}
                                 />
                                 <br/>
@@ -157,7 +165,7 @@ class UpdateProduct extends Component {
                                 <Form.Group controlId="gender">
                                     <Form.Label>Change Gender:</Form.Label>
                                     <Form.Control name="gender" onChange={this.handleChange} as="select">
-                                        <option value="">-</option>
+                                        <option value={gender}>{gender}</option>
                                         <option value="men">Men</option>
                                         <option value="women">Women</option>
                                     </Form.Control>
@@ -166,7 +174,7 @@ class UpdateProduct extends Component {
                                 <Form.Group controlId="style">
                                     <Form.Label>Change Style:</Form.Label>
                                     <Form.Control name="style" onChange={this.handleChange} as="select">
-                                        <option value="">-</option>
+                                        <option value={style}>{style}</option>
                                         <option value="bottom">Bottom</option>
                                         <option value="Top">Top</option>
                                         <option value="One-Piece">One-Piece</option>
@@ -174,12 +182,35 @@ class UpdateProduct extends Component {
                                 </Form.Group>
 
                                 <Form.Label>Change Description:</Form.Label>
-                                <Form.Control name='description' type="text" as="textarea" rows="3" onChange={this.handleChange}/>
+                                <Form.Control name='description' type="text" as="textarea" rows="3" placeholder={description} onChange={this.handleChange}/>
                                 <br/>
 
                                 <Row>
                                     <Col>
-                                        <Button variant="primary"  >
+                                        <Button variant="primary" onClick={()=>{
+                                            let imageNames = this.state.imgFiles;
+                                            let item = value.getItem2(this.state.selProduct)
+                                            value.openModal(
+                                                {
+                                                    Item: {
+                                                        "id": item.id,
+                                                        "title": item.title,
+                                                        "info": {
+                                                            "img": item.info.img,
+                                                            "price": this.state.price,
+                                                            "sizes": [],
+                                                            "selSize": '',
+                                                            "selColor": '',
+                                                            "style": this.state.style,
+                                                            "description": this.state.description,
+                                                            "gender": this.state.gender,
+                                                            "inCart": false,
+                                                            "count": 0,
+                                                            "total": 0,
+                                                            "type":this.state.type
+                                                        }
+                                                    }
+                                                })}} >
                                             Preview Changes
                                         </Button>
                                     </Col>
@@ -190,7 +221,9 @@ class UpdateProduct extends Component {
                                     </Col>
                                 </Row>
                                 <br/>
-                                <Button variant="danger">
+                                <Button variant="danger" onClick={()=>{
+                                    this.deleteItem(value.products)
+                                }}>
                                     Delete Product
                                 </Button>
                             </Form>

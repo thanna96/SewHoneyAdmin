@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {Switch,Route, Redirect} from "react-router-dom";
+import {Redirect, Route, Switch} from "react-router-dom";
 import Header from './components/header/Header'
 import AddProduct from "./components/addProduct/AddProduct";
 import UpdateProduct from "./components/updateProduct/UpdateProduct";
@@ -8,8 +8,7 @@ import LoginPage from "./components/loginPage/LoginPage";
 import SuccessModal from "./components/successModal/SuccessModal";
 
 const checkAuth = () =>{
-    const token = localStorage.getItem('token');
-    return token;
+    return localStorage.getItem('token');
 }
 
 const AuthRoute = ({ component: Component, ...rest }) => (
